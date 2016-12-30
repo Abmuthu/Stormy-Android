@@ -6,7 +6,9 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -19,7 +21,8 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
-    String errorMessage = null;
+    private String mErrorMessage = null;
+    private CurrentWeather mCurrentWeather = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         String apiKey = "5df33850f2b800a4e706f7bfe967ae2b";
-        double latitude = 37777.8267;
+        double latitude = 37.8267;
         double longitude = -122.4233;
         String apiURL = "https://api.darksky.net/forecast/" + apiKey + "/" + latitude + "," + longitude;
         if(isNetworkAvailable()) {
@@ -45,24 +48,59 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     try {
-                        Log.v(TAG, response.body().string());
+                        String jsonData = response.body().string();
+                        Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
-
+                            mCurrentWeather = getCurrentWeather(jsonData);
                         } else {
-                            errorMessage = "Error Occured! Please try again!";
+                            mErrorMessage = "Error Occured! Please try again!";
                             alertUser();
                         }
                     } catch (IOException e) {
-                        Log.e(TAG, "Exception caught:", e);
+                        Log.e(TAG, "IO Exception caught:", e);
+                    } catch (JSONException e) {
+                        Log.e(TAG, "JSON Exception caught:", e);
                     }
                 }
             });
         } else {
-            errorMessage = "Internet is not available!";
+            mErrorMessage = "Internet is not available!";
             alertUser();
-//            Toast.makeText(this, "Internet is not available!", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private CurrentWeather getCurrentWeather(String jsonData) throws JSONException {
+        JSONObject weatherObject = new JSONObject(jsonData);
+        String timeZone = weatherObject.getString("timezone");
+        JSONObject currently = weatherObject.getJSONObject("currently");
+        String icon = currently.getString("icon");
+        long time = currently.getLong("time");
+        double temperature = currently.getDouble("temperature");
+        double humidity = currently.getDouble("humidity");
+        double precipProbability = currently.getDouble("precipProbability");
+        String summary = currently.getString("summary");
+
+        CurrentWeather currentWeather = new CurrentWeather();
+        currentWeather.setIcon(icon);
+        currentWeather.setTime(time);
+        currentWeather.setTemperature(temperature);
+        currentWeather.setHumidity(humidity);
+        currentWeather.setPrecipProbability(precipProbability);
+        currentWeather.setSummary(summary);
+        currentWeather.setTimeZone(timeZone);
+
+        Log.d(TAG, currentWeather.getFormattedTime());
+//
+//        Log.i(TAG, "TimeZone:" + timeZone);
+//        Log.i(TAG, "icon:" + icon);
+//        Log.i(TAG, "Time:" + time);
+//        Log.i(TAG, "temperature:" + temperature + "");
+//        Log.i(TAG, "humidity:" + humidity + "");
+//        Log.i(TAG, "precipProbability:" + precipProbability + "");
+//        Log.i(TAG, "summary:" + summary);
+
+        return currentWeather;
     }
 
     private boolean isNetworkAvailable() {
@@ -78,11 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void alertUser() {
         Bundle bundle = new Bundle();
-        bundle.putString("passed_msg", errorMessage);
+        bundle.putString("passed_msg", mErrorMessage);
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.setArguments(bundle);
         dialog.show(getFragmentManager(), "error dialog");
-
     }
 
 }
