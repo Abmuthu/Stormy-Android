@@ -31,6 +31,44 @@ public class CurrentWeather {
         return mIcon;
     }
 
+    public int getIconID() {
+//        clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
+        int iconID = -1;
+        switch (mIcon) {
+            case "clear-day":
+                            iconID = R.drawable.clear_day;
+                            break;
+            case "clear-night":
+                            iconID = R.drawable.clear_night;
+                            break;
+            case "rain":
+                        iconID = R.drawable.rain;
+                        break;
+            case "snow":
+                        iconID = R.drawable.snow;
+                        break;
+            case "sleet":
+                        iconID = R.drawable.sleet;
+                        break;
+            case "wind":
+                        iconID = R.drawable.wind;
+                        break;
+            case "fog":
+                        iconID = R.drawable.fog;
+                        break;
+            case "cloudy":
+                        iconID = R.drawable.cloudy;
+                        break;
+            case "partly-cloudy-day":
+                        iconID = R.drawable.partly_cloudy;
+                        break;
+            default:
+                        iconID = R.drawable.clear_day;
+        }
+
+        return iconID;
+    }
+
     public void setIcon(String icon) {
         mIcon = icon;
     }
@@ -51,8 +89,8 @@ public class CurrentWeather {
         mTime = time;
     }
 
-    public double getTemperature() {
-        return mTemperature;
+    public int getTemperature() {
+        return (int) Math.round(mTemperature);
     }
 
     public void setTemperature(double temperature) {
@@ -67,8 +105,9 @@ public class CurrentWeather {
         mHumidity = humidity;
     }
 
-    public double getPrecipProbability() {
-        return mPrecipProbability;
+    public int getPrecipProbability() {
+        double precipPercentage = mPrecipProbability * 100;
+        return (int)Math.round(precipPercentage);
     }
 
     public void setPrecipProbability(double precipProbability) {
