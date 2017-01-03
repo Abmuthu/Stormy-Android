@@ -1,4 +1,6 @@
-package com.example.abmuthu.stormy;
+package com.example.abmuthu.stormy.Model;
+
+import com.example.abmuthu.stormy.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

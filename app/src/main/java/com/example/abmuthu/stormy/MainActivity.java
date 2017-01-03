@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.abmuthu.stormy.Model.CurrentWeather;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
