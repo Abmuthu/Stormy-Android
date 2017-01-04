@@ -1,4 +1,4 @@
-package com.example.abmuthu.stormy;
+package com.example.abmuthu.stormy.controller;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

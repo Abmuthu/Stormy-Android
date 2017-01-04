@@ -1,4 +1,4 @@
-package com.example.abmuthu.stormy.Model;
+package com.example.abmuthu.stormy.model;
 
 /**
  * Created by abmuthu on 1/3/17.

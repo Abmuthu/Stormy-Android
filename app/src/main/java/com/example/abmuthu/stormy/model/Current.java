@@ -1,4 +1,4 @@
-package com.example.abmuthu.stormy.Model;
+package com.example.abmuthu.stormy.model;
 
 import com.example.abmuthu.stormy.R;
 
@@ -10,7 +10,7 @@ import java.util.TimeZone;
  * Created by abmuthu on 12/29/16.
  */
 
-public class CurrentWeather {
+public class Current {
 
     private String mIcon;
     private long mTime;
@@ -35,40 +35,7 @@ public class CurrentWeather {
 
     public int getIconID() {
 //        clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
-        int iconID = -1;
-        switch (mIcon) {
-            case "clear-day":
-                            iconID = R.drawable.clear_day;
-                            break;
-            case "clear-night":
-                            iconID = R.drawable.clear_night;
-                            break;
-            case "rain":
-                        iconID = R.drawable.rain;
-                        break;
-            case "snow":
-                        iconID = R.drawable.snow;
-                        break;
-            case "sleet":
-                        iconID = R.drawable.sleet;
-                        break;
-            case "wind":
-                        iconID = R.drawable.wind;
-                        break;
-            case "fog":
-                        iconID = R.drawable.fog;
-                        break;
-            case "cloudy":
-                        iconID = R.drawable.cloudy;
-                        break;
-            case "partly-cloudy-day":
-                        iconID = R.drawable.partly_cloudy;
-                        break;
-            default:
-                        iconID = R.drawable.clear_day;
-        }
-
-        return iconID;
+        return Forecast.getIconID(mIcon);
     }
 
     public void setIcon(String icon) {

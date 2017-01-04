@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+            tools:background="#000000"
+            android:paddingLeft="64dp"
+            android:paddingRight="32dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/bg_temperature"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/tempImageView"/>
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dayTextView"
+        tools:text="Partly Sunny"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/iconImageView"
+        android:layout_toEndOf="@+id/iconImageView"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/clear_day"
+        android:id="@+id/iconImageView"
+        android:layout_centerVertical="true" android:layout_toRightOf="@+id/tempImageView"
+        android:layout_toEndOf="@+id/tempImageView" android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"/>
+    <TextView
+        android:text="124"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tempImageView"
+        android:layout_alignBottom="@id/tempImageView"
+        android:layout_alignRight="@+id/tempImageView"
+        android:layout_alignLeft="@id/tempImageView"
+        android:gravity="center"
+        android:id="@+id/tempTextView"
+       />
+</RelativeLayout>
