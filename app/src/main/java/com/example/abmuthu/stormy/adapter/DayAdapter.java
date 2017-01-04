@@ -1,6 +1,7 @@
 package com.example.abmuthu.stormy.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class DayAdapter extends BaseAdapter {
             holder.dayTextView = (TextView) view.findViewById(R.id.dayTextView);
             holder.iconImageView = (ImageView) view.findViewById(R.id.iconImageView);
             holder.tempTextView = (TextView) view.findViewById(R.id.tempTextView);
-
+            holder.tempImageView = (ImageView) view.findViewById(R.id.tempImageView);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -60,7 +61,12 @@ public class DayAdapter extends BaseAdapter {
         holder.iconImageView.setImageResource(day.getIconID());
         holder.tempTextView.setText(day.getMaxTemp() + "");
         holder.dayTextView.setText(day.getDayOfTheWeek());
-
+        if(i == 0) {
+            holder.dayTextView.setText("Today");
+        } else {
+            holder.dayTextView.setText(day.getDayOfTheWeek());
+        }
+        holder.tempImageView.setImageResource(R.drawable.bg_temperature);
         return view;
 
     }
@@ -69,6 +75,7 @@ public class DayAdapter extends BaseAdapter {
         public ImageView iconImageView;
         public TextView dayTextView;
         public TextView tempTextView;
+        public ImageView tempImageView;
 
     }
 }

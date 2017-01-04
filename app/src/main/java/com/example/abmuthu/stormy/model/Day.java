@@ -92,7 +92,7 @@ public class Day implements Parcelable{
         mMaxTemp = in.readDouble();
     }
 
-    private static final Creator<Day> DAY = new Creator<Day>() {
+    public static final Creator<Day> CREATOR = new Creator<Day>() {
         @Override
         public Day createFromParcel(Parcel parcel) {
             return new Day(parcel);
@@ -102,5 +102,7 @@ public class Day implements Parcelable{
         public Day[] newArray(int i) {
             return new Day[i];
         }
-    }
+    };
+
+    public Day() {}
 }
