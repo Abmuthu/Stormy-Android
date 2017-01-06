@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String DAILY_WEATHER = "DAILY_WEATHER";
+    public static final String HOURLY_WEATHER = "HOURLY_WEATHER";
     private String mErrorMessage = null;
 
     private Forecast mForecast = null;
@@ -74,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(DAILY_WEATHER, mForecast.getDailyWeather());
                 startActivity(intent);
 
+            }
+        });
+        mHourlyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HourlyWeatherActivity.class);
+                intent.putExtra(HOURLY_WEATHER, mForecast.getHourlyWeather());
+                startActivity(intent);
             }
         });
         getForecast();
